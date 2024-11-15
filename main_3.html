@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shazam</title>
+    <link rel="icon" href="Pictures/Logo.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div id="content">
+        <div id="popup-login" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+                <h2>Login</h2>
+                <form action="http://localhost:3000/login" method="post">
+                    <label for="login-username">Username:</label><br>
+                    <input type="text" id="login-username" name="username"><br>
+                    <label for="login-password">Password:</label><br>
+                    <input type="password" id="login-password" name="password"><br>
+                    <button type="submit" class="action_1">Login</button>
+                    <button type="button" onclick="openSignupPopup()" class="action_1">Sign Up</button>
+                </form>
+                <p id="login-message" style="text-align: center; font-style: italic; font-weight: bold;"></p>
+            </div>
+        </div>
+        <div id="popup-signup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closeSignupPopup()">&times;</span>
+                <h2>Sign Up</h2>
+                <form action="http://localhost:3000/signup" method="post">
+                    <label for="fullname">Full Name:</label><br>
+                    <input type="text" id="fullname" name="fullname"><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password"><br>
+                    <button type="submit" >Sign Up</button>
+                </form>
+                <p id="signup-message" style="text-align: center; font-style: italic; font-weight: bold;"></p>
+            </div>
+        </div>
+        <header id="header" class="">
+            <div class="header-cont container">
+                <div class="left-cont">
+                    <img class="header-brand" src="Pictures/Logo.jpeg" alt="Logo">
+                    <ul class="main-nav">
+                        <li class="nav-item active" onclick="not_l()">Home</li>
+                        <li class="nav-item" onclick="not_l()">Tv Shows</li>
+                        
+                        <li class="nav-item" onclick="showPopup()">Login</li>
+                    </ul>
+                </div>
+                <div class="right-cont">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard" onclick="not_l()">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 4.57092C16.3922 5.05624 18.9998 7.9736 18.9998 11.5V15.2538C20.0486 15.3307 21.0848 15.4245 22.107 15.5347L21.8926 17.5232C18.7219 17.1813 15.409 17 11.9998 17C8.59056 17 5.27764 17.1813 2.10699 17.5232L1.89258 15.5347C2.91473 15.4245 3.95095 15.3307 4.99978 15.2538V11.5C4.99978 7.97345 7.6076 5.05599 11 4.57086V2H13V4.57092ZM8.62568 19.3712C8.6621 20.5173 10.1509 22 11.9993 22C13.8477 22 15.3365 20.5173 15.373 19.3712C15.38 19.1489 15.1756 19 14.9531 19H9.04555C8.82308 19 8.61862 19.1489 8.62568 19.3712Z" fill="currentColor"></path>
+                    </svg>
+                    <img src="Pictures/Icon.jpg" alt="Icon" id="account" onclick="toggleDropdown()">
+                    <div id="dropdown" class="dropdown-content" style="text-align: center;">
+                        <!-- User details here -->
+                        <p><span id="logged_in"></span>
+                            <img src="Pictures/User.jpg" alt="User Image" class="user-image">
+                        </p>            
+                        <br>       
+                        <button onclick="showPopup()">Login</button>
+                    </div>
+                    <div id="notificationDropdown" class="dropdown-content notification-dropdown">
+                        <p style="color: white;">No notifications</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="banner-section" id="banner-section" style="background-image: url(Pictures/Napolean.jpg);" onclick="not_l()">
+            <div class="banner_fadeBottom"></div>
+            <div class="banner-content container">
+                <h2 class="banner__title">Napolean</h2>
+                <p class="banner__info">Trending in movies | Released - 2023 </p>
+                <p class="banner__overview" id="dsp">The film Napoleon is loosely based on the life of the general-turned-emperor of that name. The plot focuses on the relationship between the title character and a woman who cannot give him an heir. It follows the ups and downs of a passionate marriage, interspersed with battle scenes....</p>
+                <div class="action-buttons-cont">
+                    <button class="action-button" onclick="banner()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard"><path d="M4 2.69127C4 1.93067 4.81547 1.44851 5.48192 1.81506L22.4069 11.1238C23.0977 11.5037 23.0977 12.4963 22.4069 12.8762L5.48192 22.1849C4.81546 22.5515 4 22.0693 4 21.3087V2.69127Z" fill="currentColor"></path></svg> &nbsp;&nbsp; Play</button>
+                    <button class="action-button" onclick="change()" value="more" id="btn1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3ZM1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM13 10V18H11V10H13ZM12 8.5C12.8284 8.5 13.5 7.82843 13.5 7C13.5 6.17157 12.8284 5.5 12 5.5C11.1716 5.5 10.5 6.17157 10.5 7C10.5 7.82843 11.1716 8.5 12 8.5Z" fill="currentColor"></path></svg> &nbsp;&nbsp; More Info</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- movies sections -->
+        <div class="movies-cont container" id="movies-cont" onclick="not_l()">
+            <h2 class="movie-section-heading">Trending <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Trending">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Kung_Fu_Panda_4">
+                    <img class="move-item-img" src="Pictures/Kung_Fu_Panda_4.jpg" alt="Kung_Fu_Panda_4" />
+                    <div class="iframe-wrap" id="Kung_Fu_Panda_4"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Dune_2">
+                    <img class="move-item-img" src="Pictures/Dune_2.jpg" alt="Dune_2" />
+                    <div class="iframe-wrap" id="Dune_2"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Godzilla_X_Kong">
+                    <img class="move-item-img" src="Pictures/Godzilla_X_Kong.jpg" alt="Kung Fu Panda 4" />
+                    <div class="iframe-wrap" id="Godzilla_X_Kong"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Argylle">
+                    <img class="move-item-img" src="Pictures/Argylle.jpg" alt="Kung Fu Panda 4" />
+                    <div class="iframe-wrap" id="Argylle"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Action<span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Action">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Civil_War">
+                    <img class="move-item-img" src="Pictures/Civil_War.jpg" alt="Civil_War" />
+                    <div class="iframe-wrap" id="Civil_War"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="No_Way_Up">
+                    <img class="move-item-img" src="Pictures/No_Way_Up.jpg" alt="No_Way_Up" />
+                    <div class="iframe-wrap" id="No_Way_Up"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Godzilla_x_kong_The_New_Empire">
+                    <img class="move-item-img" src="Pictures/Godzilla_x_kong_The_New_Empire.jpg"
+                        alt="Godzilla_x_kong_The_New_Empire" />
+                    <div class="iframe-wrap" id="Godzilla_x_kong_The_New_Empire"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Voyagers">
+                    <img class="move-item-img" src="Pictures/The_Voyagers.jpg" alt="The_Voyagers" />
+                    <div class="iframe-wrap" id="The_Voyagers"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Adventure <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Adventure">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Rebel_Moon_Part_2_The_Scargiver">
+                    <img class="move-item-img" src="Pictures/Rebel_Moon_Part_2_The_Scargiver.jpg" alt="Rebel_Moon_Part_2_The_Scargiver" />
+                    <div class="iframe-wrap" id="Rebel_Moon_Part_2_The_Scargiver"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Late_Night_With_the_Devil">
+                    <img class="move-item-img" src="Pictures/Late_Night_With_the_Devil.jpg"
+                        alt="Late_Night_With_the_Devil" />
+                    <div class="iframe-wrap" id="Late_Night_With_the_Devil"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Coco">
+                    <img class="move-item-img" src="Pictures/Coco.jpg" alt="Coco" />
+                    <div class="iframe-wrap" id="Coco"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Poor_Things">
+                    <img class="move-item-img" src="Pictures/Poor_Things.jpg" alt="Poor_Things" />
+                    <div class="iframe-wrap" id="Poor_Things"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Animation <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Animation">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Trolls_Band_Together">
+                    <img class="move-item-img" src="Pictures/Trolls_Band_Together.jpg" alt="Trolls_Band_Together" />
+                    <div class="iframe-wrap" id="Trolls_Band_Together"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Woody_Woodpecker">
+                    <img class="move-item-img" src="Pictures/Woody_Woodpecker.jpg" alt="Woody_Woodpecker" />
+                    <div class="iframe-wrap" id="Woody_Woodpecker"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Justice_League_Warworld">
+                    <img class="move-item-img" src="Pictures/Justice_League_Warworld.jpg"
+                        alt="Justice_League_Warworld" />
+                    <div class="iframe-wrap" id="Justice_League_Warworld"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Kung_Fu_Panda_4">
+                    <img class="move-item-img" src="Pictures/Kung_Fu_Panda_4.jpg" alt="Kung_Fu_Panda_4" />
+                    <div class="iframe-wrap" id="Kung_Fu_Panda_4"></div>
+                </div>
+            </div>
+            <h2 class="movie-section-heading">Comedy<span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Comedy">
+                
+                <div class="movie-item" onclick="searchAndSet(this)" id="Dead_Boy_Detectives">
+                    <img class="move-item-img" src="Pictures/Dead_Boy_Detectives.jpg" alt="Dead_Boy_Detectives" />
+                    <div class="iframe-wrap" id="Dead_Boy_Detectives"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Migration">
+                    <img class="move-item-img" src="Pictures/Migration.jpg" alt="Migration" />
+                    <div class="iframe-wrap" id="Migration"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Love_Lies_Bleeding">
+                    <img class="move-item-img" src="Pictures/Love_Lies_Bleeding.jpg" alt="Love_Lies_Bleeding" />
+                    <div class="iframe-wrap" id="Love_Lies_Bleeding"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Outsource">
+                    <img class="move-item-img" src="Pictures/Outsource.jpg" alt="Outsource" />
+                    <div class="iframe-wrap" id="Outsource"></div>
+                </div>
+            </div>
+            <h2 class="movie-section-heading">Crime <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Crime">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Damaged">
+                    <img class="move-item-img" src="Pictures/Damaged.jpg" alt="Damaged" />
+                    <div class="iframe-wrap" id="Damaged"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="XXX">
+                    <img class="move-item-img" src="Pictures/XXX.jpg" alt="XXX" />
+                    <div class="iframe-wrap" id="XXX"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Monkey_Man">
+                    <img class="move-item-img" src="Pictures/Monkey_Man.jpg" alt="Monkey_Man" />
+                    <div class="iframe-wrap" id="Monkey_Man"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Fast_X">
+                    <img class="move-item-img" src="Pictures/Fast_X.jpg" alt="Fast_X" />
+                    <div class="iframe-wrap" id="Fast_X"></div>
+                </div>
+            </div>
+            <h2 class="movie-section-heading">Documentary <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Documentary">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Becoming">
+                    <img class="move-item-img" src="Pictures/Becoming.jpg" alt="Becoming" />
+                    <div class="iframe-wrap" id="Becoming"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Tigers_ON_The_Rise">
+                    <img class="move-item-img" src="Pictures/Tigers_ON_The_Rise.jpg" alt="Tigers_ON_The_Rise" />
+                    <div class="iframe-wrap" id="Tigers_ON_The_Rise"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Tiger">
+                    <img class="move-item-img" src="Pictures/Tiger.jpg" alt="Tiger" />
+                    <div class="iframe-wrap" id="Tiger"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Poor_Things">
+                    <img class="move-item-img" src="Pictures/Poor_Things.jpg" alt="Poor_Things" />
+                    <div class="iframe-wrap" id="Poor_Things"></div>
+                </div>
+            </div>
+            <h2 class="movie-section-heading">Drama <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Drama">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Rebel_Moon_Part_2_The_Scargiver">
+                    <img class="move-item-img" src="Pictures/Rebel_Moon_Part_2_The_Scargiver.jpg"
+                        alt="Rebel_Moon_Part_2_The_Scargiver" />
+                    <div class="iframe-wrap" id="Rebel_Moon_Part_2_The_Scargiver"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Three_Musketeers_Part_II">
+                    <img class="move-item-img" src="Pictures/The_Three_Musketeers_Part_II.jpg"
+                        alt="The_Three_Musketeers_Part_II" />
+                    <div class="iframe-wrap" id="The_Three_Musketeers_Part_II"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Arthur_the_King">
+                    <img class="move-item-img" src="Pictures/Arthur_the_King.jpg" alt="Arthur_the_King" />
+                    <div class="iframe-wrap" id="Arthur_the_King"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Stepfather_3">
+                    <img class="move-item-img" src="Pictures/Stepfather_3.jpg" alt="Stepfather_3" />
+                    <div class="iframe-wrap" id="Stepfather_3"></div>
+                </div>
+            </div>
+            <h2 class="movie-section-heading">Family <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Family">
+                
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Zone_of_Interest">
+                    <img class="move-item-img" src="Pictures/The_Zone_of_Interest.jpg" alt="The_Zone_of_Interest" />
+                    <div class="iframe-wrap" id="The_Zone_of_Interest"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Kung_Fu_Panda_4">
+                    <img class="move-item-img" src="Pictures/Kung_Fu_Panda_4.jpg" alt="Kung_Fu_Panda_4" />
+                    <div class="iframe-wrap" id="Kung_Fu_Panda_4"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Woody_Woodpecker">
+                    <img class="move-item-img" src="Pictures/Woody_Woodpecker.jpg" alt="Woody_Woodpecker" />
+                    <div class="iframe-wrap" id="Woody_Woodpecker"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Coco">
+                    <img class="move-item-img" src="Pictures/Coco.jpg" alt="Coco" />
+                    <div class="iframe-wrap" id="Coco"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Fantasy <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Fantasy">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Knuckles">
+                    <img class="move-item-img" src="Pictures/Knuckles.jpg" alt="Knuckles" />
+                    <div class="iframe-wrap" id="Knuckles"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Alienoid">
+                    <img class="move-item-img" src="Pictures/Alienoid.jpg" alt="Alienoid" />
+                    <div class="iframe-wrap" id="Alienoid"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Fifty_Shades_of_Black">
+                    <img class="move-item-img" src="Pictures/Fifty_Shades_of_Black.jpg" alt="Fifty_Shades_of_Black" />
+                    <div class="iframe-wrap" id="Fifty_Shades_of_Black"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Damsel">
+                    <img class="move-item-img" src="Pictures/Damsel.jpg" alt="Damsel" />
+                    <div class="iframe-wrap" id="Damsel"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">History <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="History">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Spitfire_Over_Berlin">
+                    <img class="move-item-img" src="Pictures/Spitfire_Over_Berlin.jpg" alt="Spitfire_Over_Berlin" />
+                    <div class="iframe-wrap" id="Spitfire_Over_Berlin"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Oppenheimer">
+                    <img class="move-item-img" src="Pictures/Oppenheimer.jpg" alt="Oppenheimer" />
+                    <div class="iframe-wrap" id="Oppenheimer"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Napoleon">
+                    <img class="move-item-img" src="Pictures/Napoleon.jpg" alt="Napoleon" />
+                    <div class="iframe-wrap" id="Napoleon"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Tigers_ON_The_Rise">
+                    <img class="move-item-img" src="Pictures/Tigers_ON_The_Rise.jpg" alt="Tigers_ON_The_Rise" />
+                    <div class="iframe-wrap" id="Tigers_ON_The_Rise"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Horror <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Horror">
+                <div class="movie-item" onclick="searchAndSet(this)" id="No_Way_Up">
+                    <img class="move-item-img" src="Pictures/No_Way_Up.jpg" alt="No_Way_Up" />
+                    <div class="iframe-wrap" id="No_Way_Up"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Immaculate">
+                    <img class="move-item-img" src="Pictures/Immaculate.jpg" alt="Immaculate" />
+                    <div class="iframe-wrap" id="Immaculate"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Late_Night_With_the_Devil">
+                    <img class="move-item-img" src="Pictures/Late_Night_With_the_Devil.jpg"
+                        alt="Late_Night_With_the_Devil" />
+                    <div class="iframe-wrap" id="Late_Night_With_the_Devil"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Exhuma">
+                    <img class="move-item-img" src="Pictures/Exhuma.jpg" alt="Exhuma" />
+                    <div class="iframe-wrap" id="Exhuma"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Music <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Music">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Trolls_Band_Together">
+                    <img class="move-item-img" src="Pictures/Trolls_Band_Together.jpg" alt="Trolls_Band_Together" />
+                    <div class="iframe-wrap" id="Trolls_Band_Together"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Noah's_Ark">
+                    <img class="move-item-img" src="Pictures/Noah's_Ark.jpg" alt="Noah's_Ark" />
+                    <div class="iframe-wrap" id="Noah's_Ark"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Coco">
+                    <img class="move-item-img" src="Pictures/Coco.jpg" alt="Coco" />
+                    <div class="iframe-wrap" id="Coco"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Bohemian_Rhapsody">
+                    <img class="move-item-img" src="Pictures/Bohemian_Rhapsody.jpg" alt="Bohemian_Rhapsody" />
+                    <div class="iframe-wrap" id="Bohemian_Rhapsody"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Mystery <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Mystery">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Immaculate">
+                    <img class="move-item-img" src="Pictures/Immaculate.jpg" alt="Immaculate" />
+                    <div class="iframe-wrap" id="Immaculate"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Breathe">
+                    <img class="move-item-img" src="Pictures/Breathe.jpg" alt="Breathe" />
+                    <div class="iframe-wrap" id="Breathe"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Godzilla_X_Kong">
+                    <img class="move-item-img" src="Pictures/Godzilla_X_Kong.jpg" alt="Kung Fu Panda 4" />
+                    <div class="iframe-wrap" id="Godzilla_X_Kong"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Heart_of_the_Hunter">
+                    <img class="move-item-img" src="Pictures/Heart_of_the_Hunter.jpg" alt="Heart_of_the_Hunter" />
+                    <div class="iframe-wrap" id="Heart_of_the_Hunter"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Romance <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Romance">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Love_Lies_Bleeding">
+                    <img class="move-item-img" src="Pictures/Love_Lies_Bleeding.jpg" alt="Love_Lies_Bleeding" />
+                    <div class="iframe-wrap" id="Love_Lies_Bleeding"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="One_Day">
+                    <img class="move-item-img" src="Pictures/One_Day.jpg" alt="One_Day" />
+                    <div class="iframe-wrap" id="One_Day"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Poor_Things">
+                    <img class="move-item-img" src="Pictures/Poor_Things.jpg" alt="Poor_Things" />
+                    <div class="iframe-wrap" id="Poor_Things"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Anyone_But_You">
+                    <img class="move-item-img" src="Pictures/Anyone_But_You.jpg" alt="Anyone_But_You" />
+                    <div class="iframe-wrap" id="Anyone_But_You"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Science_Fiction <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Science_Fiction">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Rebel_Moon_Part_2_The_Scargiver">
+                    <img class="move-item-img" src="Pictures/Rebel_Moon_Part_2_The_Scargiver.jpg"
+                        alt="Rebel_Moon_Part_2_The_Scargiver" />
+                    <div class="iframe-wrap" id="Rebel_Moon_Part_2_The_Scargiver"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Godzilla_x_kong_The_New_Empire">
+                    <img class="move-item-img" src="Pictures/Godzilla_x_kong_The_New_Empire.jpg"
+                        alt="Godzilla_x_kong_The_New_Empire" />
+                    <div class="iframe-wrap" id="Godzilla_x_kong_The_New_Empire"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Dune_2">
+                    <img class="move-item-img" src="Pictures/Dune_2.jpg" alt="Dune_2" />
+                    <div class="iframe-wrap" id="Dune_2"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Argylle">
+                    <img class="move-item-img" src="Pictures/Argylle.jpg" alt="Kung Fu Panda 4" />
+                    <div class="iframe-wrap" id="Argylle"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">TV_Movie <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="TV_Movie">
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Voyagers">
+                    <img class="move-item-img" src="Pictures/The_Voyagers.jpg" alt="The_Voyagers" />
+                    <div class="iframe-wrap" id="The_Voyagers"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Descendants_3">
+                    <img class="move-item-img" src="Pictures/Descendants_3.jpg" alt="Descendants_3" />
+                    <div class="iframe-wrap" id="Descendants_3"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Godzilla_X_Kong">
+                    <img class="move-item-img" src="Pictures/Godzilla_X_Kong.jpg" alt="Kung Fu Panda 4" />
+                    <div class="iframe-wrap" id="Godzilla_X_Kong"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Stepfather_3">
+                    <img class="move-item-img" src="Pictures/Stepfather_3.jpg" alt="Stepfather_3" />
+                    <div class="iframe-wrap" id="Stepfather_3"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Thriller <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Thriller">
+                <div class="movie-item" onclick="searchAndSet(this)" id="No_Way_Up">
+                    <img class="move-item-img" src="Pictures/No_Way_Up.jpg" alt="No_Way_Up" />
+                    <div class="iframe-wrap" id="No_Way_Up"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Immaculate">
+                    <img class="move-item-img" src="Pictures/Immaculate.jpg" alt="Immaculate" />
+                    <div class="iframe-wrap" id="Immaculate"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Damaged">
+                    <img class="move-item-img" src="Pictures/Damaged.jpg" alt="Damaged" />
+                    <div class="iframe-wrap" id="Damaged"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="FigHeart_of_the_Hunterhter">
+                    <img class="move-item-img" src="Pictures/Heart_of_the_Hunter.jpg" alt="Heart_of_the_Hunter" />
+                    <div class="iframe-wrap" id="Heart_of_the_Hunter"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">War <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="War">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Fighter">
+                    <img class="move-item-img" src="Pictures/Fighter.jpg" alt="Fighter" />
+                    <div class="iframe-wrap" id="Fighter"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Civil_War">
+                    <img class="move-item-img" src="Pictures/Civil_War.jpg" alt="Civil_War" />
+                    <div class="iframe-wrap" id="Civil_War"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Spitfire_Over_Berlin">
+                    <img class="move-item-img" src="Pictures/Spitfire_Over_Berlin.jpg" alt="Spitfire_Over_Berlin" />
+                    <div class="iframe-wrap" id="Spitfire_Over_Berlin"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Land_of_Bad">
+                    <img class="move-item-img" src="Pictures/Land_of_Bad.jpg" alt="Land_of_Bad" />
+                    <div class="iframe-wrap" id="Land_of_Bad"></div>
+                </div>
+            </div>
+    
+            <h2 class="movie-section-heading">Western <span class="explore-nudge">Explore All</span></span></h2>
+            <div class="movies-row" id="Western">
+                <div class="movie-item" onclick="searchAndSet(this)" id="Django_Unchained">
+                    <img class="move-item-img" src="Pictures/Django_Unchained.jpg" alt="Django_Unchained" />
+                    <div class="iframe-wrap" id="Django_Unchained"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Five">
+                    <img class="move-item-img" src="Pictures/The_Five.jpg" alt="The_Five" />
+                    <div class="iframe-wrap" id="The_Five"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="Death_Alley">
+                    <img class="move-item-img" src="Pictures/Death_Alley.jpg" alt="Death_Alley" />
+                    <div class="iframe-wrap" id="Death_Alley"></div>
+                </div>
+                <div class="movie-item" onclick="searchAndSet(this)" id="The_Good_The_Bad_and_The_Ugly">
+                    <img class="move-item-img" src="Pictures/The_Good_The_Bad_and_The_Ugly.jpg"
+                        alt="The_Good_The_Bad_and_The_Ugly" />
+                    <div class="iframe-wrap" id="The_Good_The_Bad_and_The_Ugly"></div>
+                </div>
+            </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        </div>
+        <!-- movies sections end -->
+        <footer>
+            <p>&copy; Shazam</p>
+        </footer>
+    </div>
+    <script>
+        function not_l(){
+            window.alert("Log in First");
+            showPopup();
+        }
+        const errors = { "e1":"Incorrect User Credentials", "e2":"User doesnt Exist", "e3":"Username already Exists"}
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        var error = getQueryParam('loginFailed');
+        var mssg = error;
+        
+        if(mssg == "e3"){
+            document.getElementById("signup-message").innerHTML = errors[error];       
+            document.getElementById("popup-signup").style.display = "block";
+        }
+        else{
+            document.getElementById("login-message").innerHTML = errors[error];       
+            document.getElementById("popup-login").style.display = "block";
+        }
+        
+        function searchAndSet(element) {
+          const query = element.id;
+          searchAndExtract(query)
+            .then(results => {  
+              results.forEach(result => {
+                result.forEach(([key, value]) => {
+                    localStorage.setItem(key, value);
+                  //keyValueParagraph.textContent = `${key}: ${value}`;                
+                });
+              });
+              window.open('template.html','_self');
+            })
+            .catch(error => {
+              console.error('Error searching data:', error);
+            });
+        }
+    
+        function searchAndExtract(query) {
+          return new Promise((resolve, reject) => {
+            fetch(`http://localhost:3000/search?query=${encodeURIComponent(query)}`)
+              .then(response => response.json())
+              .then(data => {
+                const results = [];
+                data.forEach(doc => {
+                  // Extract key-value pairs from the document
+                  const keyValuePairs = Object.entries(doc);
+                  results.push(keyValuePairs);
+                });
+                resolve(results);
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        }
+      </script>
+    <script>
+        localStorage.setItem("user","");
+
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+            }
+        }
+
+        function toggle_drop_2() {
+            var dropdown = document.getElementById("notificationDropdown");
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+            }
+        }
+        /*function open_movie_page(element) {
+            mov = element.id();
+            localStorage.setItem("name", mov);
+            localStorage.setItem("director", "SAM");
+            localStorage.setItem("video", "https://www.youtube.com/embed/U2Qp5pL3ovA");
+            window.open('template.html','_self');
+        }*/
+        
+        function change(){
+            var ele = document.getElementById('btn1');
+            var para = document.getElementById('dsp');
+            if(ele.value == "more"){
+                ele.value = "less";
+                ele.innerHTML = " Less Info";
+                para.innerHTML = "The film Napoleon is loosely based on the life of the general-turned-emperor of that name. The plot focuses on the relationship between the title character and a woman who cannot give him an heir. It follows the ups and downs of a passionate marriage, interspersed with battle scenes.<br>If you like costumed romance and the roar of cannon fire, this film is for you. There is no ponderous discussion of military tactics or grand diplomatic strategy to spoil your fun. "
+            }
+            else{
+                ele.value = "more";
+                ele.innerHTML = " More Info";
+                para.innerHTML = "The film Napoleon is loosely based on the life of the general-turned-emperor of that name. The plot focuses on the relationship between the title character and a woman who cannot give him an heir. It follows the ups and downs of a passionate marriage, interspersed with battle scenes...."
+            }
+        }
+    </script>
+</body>
+</html>

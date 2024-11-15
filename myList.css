@@ -1,0 +1,65 @@
+.my-list-cont {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    align-items: center;
+    color: #333;
+    padding: 20px; 
+    margin-bottom: 50px;
+}
+
+.main-title {
+    text-align: center; 
+    font-size: 24px; 
+    margin-top: 50px; 
+    margin-bottom: 30px; 
+    color: white;
+}
+
+.movie-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%; 
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    height: 150px; 
+}
+
+.movie-cont img {
+    width: 300px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+}
+
+.movie-title {
+    text-align: center;
+    font-size: 200%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    color: #000; 
+    flex: 1; 
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+}
+
+.movie-cont {
+    position: relative;
+    /* Add other styling for movie container */
+}
+

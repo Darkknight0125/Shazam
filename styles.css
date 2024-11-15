@@ -1,0 +1,258 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('Pictures/Movie_BG_2.png'); /* Replace 'path/to/background-image.jpg' with the actual path to your background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Fix the background image so it doesn't scroll with content */
+}
+
+main {
+    padding: 20px;
+}
+
+.video-rating {
+    position: relative;
+}
+
+.video-container {
+    padding-top: 75px;
+    width: 960px;
+    height: 540px;
+    margin: 0 auto;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.rating {
+    position: absolute;
+    width: 150px;
+    top: 75px;
+    right: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px; /* Add margin for spacing */
+    background-color: #f8f8f8; /* Background color */
+    border: 1px solid #ccc; /* Border */
+    padding: 5px;
+    border-radius: 5px;
+    /*display: flex;
+    align-items: center;*/
+}
+
+.stars {
+    cursor: pointer;
+}
+
+.star {
+    font-size: 30px;
+    color: #ffd700;
+}
+
+/* Style for rating text */
+.rating p {
+    margin-right: 10px; /* Add margin between rating text and stars */
+    font-size: 15px; /* Adjust font size */
+    color: #555; /* Text color */
+}
+
+/* Style for stars container */
+.stars {
+    display: flex;
+}
+
+/* Style for individual star */
+.star {
+    font-size: 20px; /* Adjust star size */
+    color: #ffc107; /* Star color */
+    cursor: pointer; /* Cursor style */
+}
+
+/* Hover style for individual star */
+.star:hover {
+    color: #ffcc00; /* Darker star color on hover */
+}
+
+/* Style for rating value text */
+#rating-value {
+    margin-left: 10px; /* Add margin between stars and rating value */
+    font-size: 14px; /* Adjust font size */
+    color: #555; /* Text color */
+}
+
+/* Style for submit button */
+.action-button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 8px 23px;
+    margin-right: 11px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 700;
+    cursor:pointer;
+}
+
+/* Hover style for submit button */
+.action-button:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Star+Jedi&display=swap');
+
+.movie-info {
+    text-align: center;
+    max-width: 800px;
+    margin: 20px auto;
+    color: #fff; /* Text color */
+    font-family: 'Star Jedi', sans-serif; /* Star Wars font */
+    line-height: 1.6; /* Line spacing */
+}
+
+.movie-info h2 {
+    font-size: 24px; /* Font size for the heading */
+    margin-bottom: 10px; /* Add some space below the heading */
+}
+
+.movie-info p {
+    font-size: 16px; /* Font size for paragraphs */
+    margin-bottom: 8px; /* Add some space below each paragraph */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+header{
+    background-color: black;
+    position: fixed;
+    z-index: 100;
+    left: 20px;
+    top: 0;
+    width: 100%;
+    transition: all ease 600ms;
+}
+header.black-bg{
+    background-color: rgb(20, 20, 20);
+}
+.header-cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-cont, .right-cont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header-brand{
+    max-width: 110px;
+}
+.main-nav{
+    list-style: none;
+    display: inline-flex;
+    flex-direction: row;
+}
+.nav-item{
+    margin-right: 20px;
+    color: #e5e5e5;
+    opacity: .83;
+}
+.nav-item.active{
+    color: white;
+    opacity: 1;
+    font-weight: 500;
+}
+.right-cont svg,  .right-cont img{
+    margin-right: 22px;
+    cursor: pointer;
+}
+.right-cont svg{
+    color: white;
+}
+.right-cont img{
+    max-width:40px;
+}
+.action-buttons-cont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style for dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #141414;
+    border: 1px solid #444;
+    width: 200px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%; /* Position the dropdown content below the dropdown container */
+    right:5%; /* Align the dropdown content with the left edge of the container */
+}
+
+/* Style for dropdown content items */
+.dropdown-content p {
+    color: black;
+    padding: 15px 0;
+    margin: 0;
+    text-align: center;
+}
+  
+  #dropdown p {
+    color: #fff;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  
+  #dropdown .user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    float: left;
+  }
+  
+  #dropdown button {
+    background-color: #e50914;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  /* Show the dropdown when the button is clicked */
+  #dropdown.show {
+    display: block;
+  }
+
+  .submit-btn {
+    display: block;
+    margin: 0 auto;
+  }
