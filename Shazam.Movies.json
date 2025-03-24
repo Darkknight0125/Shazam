@@ -147,7 +147,7 @@
   },
   "name": "Coco",
   "rating": "4.2",
-  "video": "https://www.youtube.com/embed/Rvr68u6k5sI",
+  "video": "https://www.youtube.com/embed/",
   "release": "2017",
   "director": " Adrian Molina",
   "info": "Despite his family’s baffling generations-old ban on music, Miguel (voice of newcomer Anthony Gonzalez) dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz (voice of Benjamin Bratt). Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector (voice of Gael García Bernal), and together, they set off on an extraordinary journey to unlock the real story behind Miguel's family history. Directed by Lee Unkrich, co-directed by Adrian Molina and produced by Darla K. Anderson, Disney•Pixar’s “Coco” opens in U.S. theaters on Nov. 22, 2017."
@@ -503,81 +503,4 @@
   "release": "2023",
   "director": "Walt Dohrn",
   "info": "Poppy discovers that Branch and his four brothers were once part of her favorite boy band. When one of his siblings, Floyd, gets kidnapped by a pair of nefarious villains, Branch and Poppy embark on a harrowing and emotional journey to reunite the other brothers and rescue Floyd from a fate even worse than pop culture obscurity."
-},
-{
-  "_id": {
-    "$oid": "662e04f27d8dd8f8df3ab3da"
-  },
-  "name": "Tigers_ON_The_Rise",
-  "rating": "3.5",
-  "video": "https://www.youtube.com/embed/LX6QGUH-Wi8",
-  "release": "2022",
-  "director": "Rob Sullivan",
-  "info": "The team celebrates the resurgence of tiger populations and showcases their triumphant return to the wild. As they reclaim their territories, they venture beyond forest reserves, posing challenges for humans and animals alike."
-},
-{
-  "_id": {
-    "$oid": "662e056e7d8dd8f8df3ab3db"
-  },
-  "name": "Tiger",
-  "rating": "3.6",
-  "video": "https://www.youtube.com/embed/AmrorntYVX0",
-  "release": "2023",
-  "director": "Park Hoon-jung",
-  "info": "\r\nChun Man-duk quits being a hunter after his wife's demise and becomes a herb gatherer. His retirement does not last long after his son is severely wounded by a tiger during a hunt."
-},
-{
-  "_id": {
-    "$oid": "662e05b67d8dd8f8df3ab3dc"
-  },
-  "name": "The_Zone_of_Interest",
-  "rating": "3.8",
-  "video": "https://www.youtube.com/embed/r-vfg3KkV54",
-  "release": "2023",
-  "director": "Jonathan Glazer",
-  "info": "In 1943, the commandant of Auschwitz, Rudolf Höss, and his wife, Hedwig, strive to build a dream life for their family in a house right next to the concentration and extermination camp he helped create."
-},
-{
-  "_id": {
-    "$oid": "662e05e67d8dd8f8df3ab3dd"
-  },
-  "name": "The_Voyagers",
-  "rating": "2.8",
-  "video": "https://www.youtube.com/embed/EwJkexUBSeg",
-  "release": "2021",
-  "director": "Neil Burger",
-  "info": "The teenage crew of a multi-generational spaceship finds out that their emotions are being medically suppressed. They stop taking the responsible drug and find themselves plunged into a chaotic abyss."
-},
-{
-  "_id": {
-    "$oid": "662e06397d8dd8f8df3ab3de"
-  },
-  "name": "The_Three_Musketeers_Part_II",
-  "rating": "3.3",
-  "video": "https://www.youtube.com/embed/FsuJMqePZtg",
-  "release": "2023",
-  "director": " Martin Bourboulon",
-  "info": "Constance Bonacieux is kidnapped before D'Artagnan's very eyes. In a frantic quest to save her, the young musketeer, aided by Athos, Porthos and Aramis, is forced to join forces with the mysterious Milady de Winter."
-},
-{
-  "_id": {
-    "$oid": "662e066d7d8dd8f8df3ab3df"
-  },
-  "name": "The_Good_The_Bad_and_The_Ugly",
-  "rating": "4.4",
-  "video": "https://www.youtube.com/embed/IFNUGzCOQoI",
-  "release": "1966",
-  "director": "Sergio Leone",
-  "info": "A bounty hunting expedition brings two men together in an uncomfortable alliance while looking for buried treasure. They also battle with a wanted outlaw who wants to settle an old score with them."
-},
-{
-  "_id": {
-    "$oid": "662e069a7d8dd8f8df3ab3e0"
-  },
-  "name": "The_Five",
-  "rating": "2.9",
-  "video": "https://www.youtube.com/embed/MrDqOFFGaAI",
-  "release": "2011",
-  "director": "Roger Ailes",
-  "info": "A panel of elite experts discusses the latest news updates regarding the current social, economic and political development."
 }]
