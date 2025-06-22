@@ -1,71 +1,57 @@
 import { sidbarItem } from '../../constants';
 import SideBarList from './SideBarList';
 import { styles } from '../../styles/styles';
-import { MdMenu, MdMenuOpen } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { DarkModeToggle } from '@anatoliygatt/dark-mode-toggle';
 import { useSelector } from 'react-redux';
 import AuthModal from '../auth/AuthModal';
-import ProfileSidebar from '../auth/ProfileSidebar';
 import { FaSpinner } from 'react-icons/fa';
+import logoImage from '../../assets/logoImage.png';
+import logoImageDark from '../../assets/logoImageDark.png';
 
-const SideBar = ({ openMenu, setOpenMenu, mode, setMode }) => {
+const SideBar = ({ openMenu, setOpenMenu, mode, setMode, isProfileSidebarOpen, setIsProfileSidebarOpen }) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleWindowResize = () => {
-      setWindowSize([window.innerWidth, window.innerHeight]);
+      setWindowSize(window.innerWidth);
     };
     window.addEventListener('resize', handleWindowResize);
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
   useEffect(() => {
-    if (windowSize[0] >= 1024) {
+    if (windowSize >= 1024) {
       setOpenMenu(true);
     } else {
       setOpenMenu(false);
     }
-  }, [windowSize]);
+  }, [windowSize, setOpenMenu]);
 
   return (
     <div
       className={`${styles.sideBar} origin-left ${
-        !openMenu && 'scale-x-0 fixed'
+        !openMenu && 'scale-x-0 hidden'
       } ${
-        openMenu && 'fixed lg:sticky dark:bg-[#07070a] lg:dark:bg-transparent bg-screenLight'
-      } duration-300 z-[52]`}
+        openMenu && 'fixed lg:sticky top-0 dark:bg-[#07070a] lg:dark:bg-transparent bg-screenLight z-[49]'
+      } duration-300`}
     >
-      <div className="lg:hidden" onClick={() => setOpenMenu(!openMenu)}>
-        {openMenu && (
-          <MdMenuOpen className="text-[27px] mt-10 mx-10 cursor-pointer text-btn" />
-        )}
+      <div
+        className={`relative ${isProfileSidebarOpen ? 'blur-sm brightness-75 pointer-events-none' : ''}`}
+      >
+      <div className="flex items-center gap-2 mt-5 mb-3 pl-4 lg:hidden">
+        <img
+          src={mode === 'dark' ? logoImage : logoImageDark}
+          alt="logo"
+          className="w-[25px] h-[31.6px] sm:w-[30px] sm:h-[38px]"
+        />
+        <p className="text-[20px] font-extrabold">
+          <span className="text-btn">SHAZAM</span>
+        </p>
       </div>
-      <div className={`lg:hidden flex ${!openMenu && 'hidden'} flex-col`}>
-        {isAuthenticated ? (
-          user ? (
-            <button
-              className={`${styles.loginBtn2} mx-5 my-5`}
-              onClick={() => setIsProfileSidebarOpen(true)}
-            >
-              PROFILE
-            </button>
-          ) : (
-            <div className="flex justify-center mx-5 my-5">
-              <FaSpinner className="animate-spin text-2xl text-btn" />
-            </div>
-          )
-        ) : (
-          <button
-            className={`${styles.loginBtn2} mx-5 my-5`}
-            onClick={() => setIsAuthModalOpen(true)}
-          >
-            LOG IN
-          </button>
-        )}
+      <div className={`lg:hidden flex ${!openMenu && 'hidden'} flex-col items-center`}>
         <div className="mx-2">
           <DarkModeToggle
             mode={mode}
@@ -88,11 +74,8 @@ const SideBar = ({ openMenu, setOpenMenu, mode, setMode }) => {
         <SideBarList subTitle="MENU" items={sidbarItem} menu={openMenu} />
       </div>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
-      <ProfileSidebar
-        isOpen={isProfileSidebarOpen}
-        onClose={() => setIsProfileSidebarOpen(false)}
-      />
     </div>
+  </div>
   );
 };
 

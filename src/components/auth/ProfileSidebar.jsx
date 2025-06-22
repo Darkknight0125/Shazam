@@ -7,7 +7,7 @@ import { FaSpinner } from 'react-icons/fa';
 import { styles } from '../../styles/styles';
 import { withRouter } from 'react-router-dom';
 
-const ProfileSidebar = ({ isOpen, onClose, history }) => {
+const ProfileSidebar = ({ isOpen, onClose, history, setOpenMenu }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [isEditing, setIsEditing] = useState(false);
@@ -16,7 +16,6 @@ const ProfileSidebar = ({ isOpen, onClose, history }) => {
   const [uploadProfilePicture, { isLoading: isUploadingPicture }] = useUploadProfilePictureMutation();
   const fileInputRef = useRef(null);
 
-  // Update local username state when user changes
   useEffect(() => {
     setUsername(user?.username || '');
   }, [user]);
@@ -25,13 +24,16 @@ const ProfileSidebar = ({ isOpen, onClose, history }) => {
     dispatch(logoutAction());
     onClose();
     history.push('/');
+    if (setOpenMenu) {
+      setOpenMenu(false); // Close sidebar on logout for consistency
+    }
   };
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     try {
-      const updatedProfile = await updateUsername({ username }).unwrap();
-      const user = updatedProfile.user; 
+      const updateProfile = await updateUsername({ username }).unwrap();
+      const user = updateProfile.user;
       dispatch(updateUser({
         id: user.id,
         username: user.username,
@@ -43,15 +45,14 @@ const ProfileSidebar = ({ isOpen, onClose, history }) => {
       console.error('Failed to update username:', err);
     }
   };
-  
 
   const handleProfilePictureUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-  
+
     const formData = new FormData();
     formData.append('profilePicture', file);
-  
+
     try {
       const updatedProfile = await uploadProfilePicture(formData).unwrap();
       const user = updatedProfile.user;
@@ -65,7 +66,6 @@ const ProfileSidebar = ({ isOpen, onClose, history }) => {
       console.error('Failed to upload profile picture:', err);
     }
   };
-  
 
   const triggerFileInput = () => {
     fileInputRef.current.click();
@@ -79,7 +79,7 @@ const ProfileSidebar = ({ isOpen, onClose, history }) => {
         className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="fixed right-0 top-0 h-full w-[300px] dark:bg-[#101018] bg-white p-6 flex flex-col">
+      <div className="fixed right-0 top-0 h-full w-[300px] dark:bg-[#101018] bg-white p-6 flex flex-col z-[51]">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold dark:text-textDark text-textLight">Profile</h2>
           <AiOutlineClose

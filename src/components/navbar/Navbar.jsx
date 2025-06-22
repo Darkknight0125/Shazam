@@ -10,16 +10,15 @@ import ProfileSidebar from '../auth/ProfileSidebar';
 import { useState } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
-const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu }) => {
+const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu, isProfileSidebarOpen, setIsProfileSidebarOpen }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
   return (
     <div className="flex justify-between pt-3 mx-3 md:mx-7">
       <div className="flex self-center justify-center">
         <div
-          className="self-center lg:hidden"
+          className="self-center"
           onClick={() => setOpenMenu(!openMenu)}
         >
           {openMenu ? (
@@ -40,8 +39,8 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
         </div>
       </div>
       <Search isSearch={isSearch} setIsSearch={setIsSearch} />
-      <div className="self-center z-20 hidden lg:flex items-center">
-        <div className="self-center mx-2">
+      <div className="self-center z-20 flex items-center">
+        <div className="self-center mx-2 lg:mx-2 hidden lg:block">
           <DarkModeToggle
             mode={mode}
             dark="dark"
@@ -64,7 +63,7 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
               <img
                 src={user.profilePicture || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}
                 alt="Profile"
-                className="w-10 h-10 rounded-full cursor-pointer"
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full cursor-pointer"
                 onClick={() => setIsProfileSidebarOpen(true)}
               />
             ) : (
@@ -73,7 +72,7 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
           </div>
         ) : (
           <button
-            className={`${styles.loginBtn}`}
+            className={`${styles.loginBtn} text-sm lg:text-base px-3 lg:px-4 py-1 lg:py-2`}
             onClick={() => setIsAuthModalOpen(true)}
           >
             LOG IN
@@ -85,6 +84,7 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
         isOpen={isProfileSidebarOpen}
         onClose={() => setIsProfileSidebarOpen(false)}
         key={user?.id || 'nouser'}
+        setOpenMenu={setOpenMenu}
       />
     </div>
   );

@@ -9,6 +9,12 @@
   url("https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf") format("truetype");
 }
 
+@media (pointer: coarse) {
+  .sidebar-hover-fix:hover {
+    background-color: transparent !important;
+  }
+}
+
 * {
   margin: 0;
   padding: 0; 

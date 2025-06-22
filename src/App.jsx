@@ -13,12 +13,13 @@ import "./styles/globalStyles.css";
 import { useGetProfileQuery } from './redux/services/authApi';
 import { setCredentials, logout } from './redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaSpinner } from "./common/icons"; 
+import { FaSpinner } from "./common/icons";
 
 const App = () => {
   const [isSearchItemsShow, setIsSearchItemsShow] = useState(false);
   const [mode, setMode] = useState(() => localStorage.getItem('theme') || 'dark');
   const [openMenu, setOpenMenu] = useState(false);
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false); // Added state
   const dispatch = useDispatch();
   const token = localStorage.getItem('authToken');
   const user = useSelector((state) => state.auth.user);
@@ -27,7 +28,7 @@ const App = () => {
     skip: !token,
   });
 
-  useEffect(() => {  
+  useEffect(() => {
     if (isSuccess && profile?.user) {
       const { id, username, email, profilePicture } = profile.user;
       dispatch(setCredentials({
@@ -75,7 +76,7 @@ const App = () => {
         onClick={() => setOpenMenu(false)}
         className={`${
           !openMenu && "hidden"
-        } fixed z-[51] w-full h-full bg-black lg:hidden backdrop-blur-sm dark:bg-opacity-70 bg-opacity-25 `}
+        } fixed z-[48] w-full h-full bg-black lg:hidden backdrop-blur-sm dark:bg-opacity-70 bg-opacity-25`}
       />
       <div
         className={`dark:text-textDark text-textLight ${
@@ -90,6 +91,8 @@ const App = () => {
           mode={mode}
           openMenu={openMenu}
           setOpenMenu={setOpenMenu}
+          isProfileSidebarOpen={isProfileSidebarOpen}
+          setIsProfileSidebarOpen={setIsProfileSidebarOpen}
         />
         <div className="flex">
           <SideBar
@@ -97,6 +100,8 @@ const App = () => {
             openMenu={openMenu}
             setOpenMenu={setOpenMenu}
             setMode={setMode}
+            isProfileSidebarOpen={isProfileSidebarOpen}
+            setIsProfileSidebarOpen={setIsProfileSidebarOpen}
           />
           <div className="w-full flex flex-col">
             <Switch>
