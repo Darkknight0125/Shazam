@@ -8,6 +8,7 @@ import Search from './Search';
 import AuthModal from '../auth/AuthModal';
 import ProfileSidebar from '../auth/ProfileSidebar';
 import { useState } from 'react';
+import { FaSpinner } from 'react-icons/fa';
 
 const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -59,12 +60,16 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
         </div>
         {isAuthenticated ? (
           <div className="relative">
-            <img
-              src={user?.profilePicture || 'https://via.placeholder.com/40'}
-              alt="Profile"
-              className="w-10 h-10 rounded-full cursor-pointer"
-              onClick={() => setIsProfileSidebarOpen(true)}
-            />
+            {user ? (
+              <img
+                src={user.profilePicture || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}
+                alt="Profile"
+                className="w-10 h-10 rounded-full cursor-pointer"
+                onClick={() => setIsProfileSidebarOpen(true)}
+              />
+            ) : (
+              <FaSpinner className="animate-spin text-2xl text-btn" />
+            )}
           </div>
         ) : (
           <button
@@ -79,6 +84,7 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu })
       <ProfileSidebar
         isOpen={isProfileSidebarOpen}
         onClose={() => setIsProfileSidebarOpen(false)}
+        key={user?.id || 'nouser'}
       />
     </div>
   );

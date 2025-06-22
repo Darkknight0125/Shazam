@@ -37,7 +37,6 @@ const AuthModal = ({ isOpen, onClose }) => {
           password: formData.password,
         }).unwrap();
       }
-      // Assuming the API returns { token, user }
       dispatch(setCredentials({ token: result.token, user: result.user }));
       onClose();
     } catch (err) {

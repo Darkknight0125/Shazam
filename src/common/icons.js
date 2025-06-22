@@ -8,3 +8,4 @@ export { BiCameraMovie } from "react-icons/bi";
 export { BiGift } from "react-icons/bi";
 export { IoNewspaperOutline } from "react-icons/io5";
 export { AiOutlineSchedule } from "react-icons/ai";
+export { FaSpinner } from 'react-icons/fa';

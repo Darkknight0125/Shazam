@@ -10,19 +10,58 @@ import MoviePage from "./pages/moviePage/MoviePage";
 import MoviesPage from "./pages/moviesPage/MoviesPage";
 import SeriesPage from "./pages/seriesPage/SeriesPage";
 import "./styles/globalStyles.css";
+import { useGetProfileQuery } from './redux/services/authApi';
+import { setCredentials, logout } from './redux/slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaSpinner } from "./common/icons"; 
 
 const App = () => {
   const [isSearchItemsShow, setIsSearchItemsShow] = useState(false);
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState(() => localStorage.getItem('theme') || 'dark');
   const [openMenu, setOpenMenu] = useState(false);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('authToken');
+  const user = useSelector((state) => state.auth.user);
+
+  const { data: profile, isSuccess, isError, isLoading } = useGetProfileQuery(undefined, {
+    skip: !token,
+  });
+
+  useEffect(() => {  
+    if (isSuccess && profile?.user) {
+      const { id, username, email, profilePicture } = profile.user;
+      dispatch(setCredentials({
+        token,
+        user: {
+          id,
+          username,
+          email,
+          profilePicture: profilePicture || null,
+        },
+      }));
+    } else if (isError) {
+      console.error('Failed to fetch profile on app load:', isError);
+      dispatch(logout());
+    }
+  }, [isSuccess, isError, profile, token, dispatch]);
 
   useEffect(() => {
+    localStorage.setItem('theme', mode);
     if (mode === "light") {
-      return document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
     } else {
       document.documentElement.classList.add("dark");
     }
   }, [mode]);
+
+  if (token && (isLoading || (!profile && !isError))) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FaSpinner className="animate-spin text-3xl text-btn" />
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <ScrollToTop smooth />
@@ -30,7 +69,7 @@ const App = () => {
         onClick={() => setIsSearchItemsShow(false)}
         className={`${
           !isSearchItemsShow && "hidden"
-        } fixed z-40 w-full h-full bg-black  backdrop-blur-sm dark:bg-opacity-60 bg-opacity-25 `}
+        } fixed z-40 w-full h-full bg-black backdrop-blur-sm dark:bg-opacity-60 bg-opacity-25 `}
       />
       <div
         onClick={() => setOpenMenu(false)}
@@ -39,10 +78,12 @@ const App = () => {
         } fixed z-[51] w-full h-full bg-black lg:hidden backdrop-blur-sm dark:bg-opacity-70 bg-opacity-25 `}
       />
       <div
-        className={`dark:text-textDark text-textLight   
-         ${mode === "dark" ? "gradient-06" : "lightTheme"} `}
+        className={`dark:text-textDark text-textLight ${
+          mode === "dark" ? "gradient-06" : "lightTheme"
+        }`}
       >
         <NavBar
+          key={user?.id || 'nouser'}
           isSearch={isSearchItemsShow}
           setIsSearch={setIsSearchItemsShow}
           setMode={setMode}
@@ -57,19 +98,11 @@ const App = () => {
             setOpenMenu={setOpenMenu}
             setMode={setMode}
           />
-          <div className=" w-full flex flex-col  ">
+          <div className="w-full flex flex-col">
             <Switch>
               <Route path={"/series"} component={() => <SeriesPage />} />
-              <Route
-                path={"/movies/:id"}
-                exact
-                component={() => <MoviePage />}
-              />
-              <Route
-                path={"/genres/:id"}
-                exact
-                component={() => <MoviesByGenre />}
-              />
+              <Route path={"/movies/:id"} exact component={() => <MoviePage />} />
+              <Route path={"/genres/:id"} exact component={() => <MoviesByGenre />} />
               <Route path={"/movies"} exact component={() => <MoviesPage />} />
               <Route path={"/genres"} exact component={() => <Genres />} />
               <Route path={"/"} exact component={() => <Explore />} />

@@ -7,10 +7,11 @@ import { DarkModeToggle } from '@anatoliygatt/dark-mode-toggle';
 import { useSelector } from 'react-redux';
 import AuthModal from '../auth/AuthModal';
 import ProfileSidebar from '../auth/ProfileSidebar';
+import { FaSpinner } from 'react-icons/fa';
 
 const SideBar = ({ openMenu, setOpenMenu, mode, setMode }) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
@@ -45,12 +46,18 @@ const SideBar = ({ openMenu, setOpenMenu, mode, setMode }) => {
       </div>
       <div className={`lg:hidden flex ${!openMenu && 'hidden'} flex-col`}>
         {isAuthenticated ? (
-          <button
-            className={`${styles.loginBtn2} mx-5 my-5`}
-            onClick={() => setIsProfileSidebarOpen(true)}
-          >
-            PROFILE
-          </button>
+          user ? (
+            <button
+              className={`${styles.loginBtn2} mx-5 my-5`}
+              onClick={() => setIsProfileSidebarOpen(true)}
+            >
+              PROFILE
+            </button>
+          ) : (
+            <div className="flex justify-center mx-5 my-5">
+              <FaSpinner className="animate-spin text-2xl text-btn" />
+            </div>
+          )
         ) : (
           <button
             className={`${styles.loginBtn2} mx-5 my-5`}
