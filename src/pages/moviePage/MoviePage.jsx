@@ -41,8 +41,8 @@ const MoviePage = ({ history }) => {
 
   return (
     <div>
-      <div className="w-full z-0 relative group top-[-84px] dark:bg-[#101018] h-[2000px] text-screenLight">
-        <div className="absolute z-20 w-full mt-28 px-3 y9:px-7 sm:px-10 md:px-5 lg:px-2 xl:px-10 2xl:px-20">
+      <div className="w-full z-0 relative group dark:bg-[#101018] h-[2000px] text-screenLight">
+        <div className="absolute z-20 w-full mt-20 px-3 y9:px-7 sm:px-10 md:px-5 lg:px-2 xl:px-10 2xl:px-20">
           <div className="flex flex-col">
             <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-auto flex justify-center md:justify-start">
@@ -188,7 +188,7 @@ const MoviePage = ({ history }) => {
               <div className="mx-8">
                 {query === "Details" && <Details />}
                 {query === "Download" && <Download />}
-                {query === "Comments" && <Comments />}
+                {query === "Comments" && <Comments movieId={movieId} />}
                 {query === "Trailer" && <Trailer />}
               </div>
             </div>

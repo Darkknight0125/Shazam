@@ -15,7 +15,7 @@ const Navbar = ({ isSearch, setIsSearch, mode, setMode, openMenu, setOpenMenu, i
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   return (
-    <div className="flex justify-between pt-3 mx-3 md:mx-7">
+    <div className="flex justify-between pt-3 mx-3 md:mx-7 z-[60]">
       <div className="flex self-center justify-center">
         <div
           className="self-center"
