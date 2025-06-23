@@ -8,10 +8,9 @@ import { BiLike, BiDislike } from "react-icons/bi";
 import { AiFillHeart, AiOutlineHeart, AiFillLike, AiFillDislike } from "react-icons/ai";
 import Trailer from "./Trailer";
 import Comments from "./Comments";
-import Download from "./Download";
 import Details from "./Details";
 
-const poi = ["Details", "Download", "Trailer", "Comments"];
+const poi = ["Details", "Trailer", "Comments"];
 
 const MoviePage = ({ history }) => {
   const [query, setQuery] = useState("Details");
@@ -163,7 +162,7 @@ const MoviePage = ({ history }) => {
                       </div>
                       <div className="self-center mt-20">
                         <button className="text-btn text-[20px] font-semibold border md:border-0 border-border px-6 py-4 rounded-lg self-center text-center backdrop-blur-sm bg-screenDark bg-opacity-80 hover:bg-screenDark duration-300">
-                          DOWNLOAD
+                          SHARE
                         </button>
                       </div>
                     </div>
@@ -186,8 +185,7 @@ const MoviePage = ({ history }) => {
                 ))}
               </ul>
               <div className="mx-8">
-                {query === "Details" && <Details />}
-                {query === "Download" && <Download />}
+                {query === "Details" && <Details movieId={movieId}/>}
                 {query === "Comments" && <Comments movieId={movieId} />}
                 {query === "Trailer" && <Trailer />}
               </div>
