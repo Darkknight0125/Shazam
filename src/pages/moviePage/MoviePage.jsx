@@ -2,7 +2,7 @@ import { Link, withRouter } from "react-router-dom";
 import { BsPlay } from "react-icons/bs";
 import { useGetMovieDetailsQuery } from "../../redux/services/tmdbApi";
 import { Spin } from "antd";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RxDotFilled } from "react-icons/rx";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { AiFillHeart, AiOutlineHeart, AiFillLike, AiFillDislike } from "react-icons/ai";
@@ -17,6 +17,7 @@ const MoviePage = ({ history }) => {
   const [liked, setLiked] = useState(false);
   const movieId = history.location.pathname.split("/")[2];
   const { data, isFetching, error } = useGetMovieDetailsQuery({ movieId });
+  const contentRef = useRef(null);
 
   const [windowSize, setWindowSize] = useState(window.innerWidth - 290 + "px");
 
@@ -28,6 +29,18 @@ const MoviePage = ({ history }) => {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
+  const handleViewTrailer = () => {
+    setQuery("Trailer");
+    if (contentRef.current) {
+      const offset = 80; // Adjust for mt-20 and some padding
+      const elementPosition = contentRef.current.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   if (isFetching) {
     return (
       <div className="flex justify-center mt-10">
@@ -36,7 +49,7 @@ const MoviePage = ({ history }) => {
     );
   }
 
-  if (error || !data) return <div>Error loading movie details.</div>;
+  if (error || !data) return <div className="text-center text-red-500 mt-10">Error loading movie details.</div>;
 
   return (
     <div>
@@ -52,7 +65,10 @@ const MoviePage = ({ history }) => {
                     className="min-w-[180px] max-h-[265px] y9:min-w-[240px] y9:max-h-[352px] lg:min-w-[200px] lg:max-h-[351px] xl:min-w-[240px] xl:max-h-[352px] self-center rounded-lg"
                   />
                   <div className="flex justify-center mt-1 z-10">
-                    <button className="w-[44px] h-[44px] bg-screenDark bg-opacity-80 hover:bg-screenDark duration-300 border border-btn text-btn flex justify-center rounded-2xl text-[25px]">
+                    <button
+                      className="w-[44px] h-[44px] bg-screenDark bg-opacity-80 hover:bg-screenDark duration-300 border border-btn text-btn flex justify-center rounded-2xl text-[25px]"
+                      onClick={handleViewTrailer}
+                    >
                       <BsPlay className="self-center" />
                     </button>
                     <p className="self-center mx-2">View Trailer</p>
@@ -170,24 +186,30 @@ const MoviePage = ({ history }) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="mt-28">
-            <div className="w-full">
-              <ul className="flex justify-between md:mx-8 xl:mx-28 2xl:mx-36 text-[17px]">
-                {poi.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`px-4 py-2 ${query === item && "bg-[length:100%_2px] font-semibold text-btn"} origin-right bg-left-bottom bg-gradient-to-r from-btn to-btn bg-[length:0%_2px] bg-no-repeat hover:bg-[length:100%_2px] transition-all duration-500 ease-out`}
-                    onClick={() => setQuery(item)}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mx-8">
-                {query === "Details" && <Details movieId={movieId}/>}
-                {query === "Comments" && <Comments movieId={movieId} />}
-                {query === "Trailer" && <Trailer />}
+            <div ref={contentRef} className="mt-28">
+              <div className="w-full">
+                {/* Header: Tabbed Navigation */}
+                <ul className="flex justify-around md:mx-6 xl:mx-20 2xl:mx-24 text-[17px] bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80 rounded-xl p-4 shadow-lg">
+                  {poi.map((item, index) => (
+                    <li
+                      key={index}
+                      className={`px-4 py-2 cursor-pointer transition-all duration-300 ease-out ${
+                        query === item
+                          ? "bg-[length:100%_2px] font-semibold text-blue-600 dark:text-blue-400"
+                          : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-300"
+                      } origin-right bg-left-bottom bg-gradient-to-r from-blue-600 to-blue-600 dark:from-blue-400 dark:to-blue-400 bg-[length:0%_2px] bg-no-repeat hover:bg-[length:100%_2px]`}
+                      onClick={() => setQuery(item)}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                {/* Body: Content Area */}
+                <div className="mx-8 mt-6 bg-white dark:bg-gray-800 bg-opacity-95 dark:bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700">
+                  {query === "Details" && <Details movieId={movieId} />}
+                  {query === "Comments" && <Comments movieId={movieId} />}
+                  {query === "Trailer" && <Trailer movieId={movieId} />}
+                </div>
               </div>
             </div>
           </div>
