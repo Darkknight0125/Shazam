@@ -9,3 +9,4 @@ export { BiGift } from "react-icons/bi";
 export { IoNewspaperOutline } from "react-icons/io5";
 export { AiOutlineSchedule } from "react-icons/ai";
 export { FaSpinner } from 'react-icons/fa';
+export { FaUserFriends } from 'react-icons/fa';

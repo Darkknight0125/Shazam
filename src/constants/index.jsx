@@ -7,6 +7,7 @@ import {
   MdMonitor,
   BiCameraMovie,
   AiOutlineSchedule,
+  FaUserFriends,
 } from "../common/icons";
 
 export const sidbarItem = [
@@ -16,4 +17,5 @@ export const sidbarItem = [
   { title: "Anime", icon: <GiCeremonialMask /> },
   { title: "Genres", icon: <BiGift /> },
   { title: "Favourites", icon: <AiOutlineHeart /> },
+  { title: "Friends", icon: <FaUserFriends /> },
 ];

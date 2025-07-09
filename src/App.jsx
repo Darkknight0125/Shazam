@@ -9,6 +9,7 @@ import MoviesByGenre from "./pages/genres/MoviesByGenre";
 import MoviePage from "./pages/moviePage/MoviePage";
 import MoviesPage from "./pages/moviesPage/MoviesPage";
 import SeriesPage from "./pages/seriesPage/SeriesPage";
+import Friends from "./pages/friends/Friends";
 import "./styles/globalStyles.css";
 import { useGetProfileQuery } from './redux/services/authApi';
 import { setCredentials, logout } from './redux/slices/authSlice';
@@ -19,7 +20,7 @@ const App = () => {
   const [isSearchItemsShow, setIsSearchItemsShow] = useState(false);
   const [mode, setMode] = useState(() => localStorage.getItem('theme') || 'dark');
   const [openMenu, setOpenMenu] = useState(false);
-  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false); // Added state
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
   const dispatch = useDispatch();
   const token = localStorage.getItem('authToken');
   const user = useSelector((state) => state.auth.user);
@@ -65,7 +66,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <ScrollToTop smooth />
       <div
         onClick={() => setIsSearchItemsShow(false)}
         className={`${
@@ -110,6 +110,7 @@ const App = () => {
               <Route path={"/genres/:id"} exact component={() => <MoviesByGenre />} />
               <Route path={"/movies"} exact component={() => <MoviesPage />} />
               <Route path={"/genres"} exact component={() => <Genres />} />
+              <Route path={"/friends"} exact component={() => <Friends />} />
               <Route path={"/"} exact component={() => <Explore />} />
             </Switch>
           </div>
